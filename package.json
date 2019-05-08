@@ -1,0 +1,19 @@
+{
+  "name": "ep_redis_publisher",
+  "version": "0.0.1",
+  "description": "Etherpad-Lite plugin that publishes pad creation, updates and removal events to a redis server",
+  "author": {
+    "name": "Pedro Beschorner Marin",
+    "email": "pedrobmarin@gmail.com",
+    "url": "https://github.com/pedrobmarin/ep_redis_publisher"
+  },
+  "dependencies": {
+     "redis": "2.8.0"
+  },
+  "peerDependencies":{
+  },
+  "repository" : {
+    "type" : "git",
+    "url" : "https://github.com/pedrobmarin/ep_redis_publisher.git"
+  }
+}

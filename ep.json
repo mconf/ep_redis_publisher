@@ -1,0 +1,12 @@
+{
+  "parts": [
+    {
+      "name": "ep_redis_publisher",
+      "hooks": {
+        "padCreate": "ep_redis_publisher/publisher:padCreate",
+        "padUpdate": "ep_redis_publisher/publisher:padUpdate",
+        "padRemove": "ep_redis_publisher/publisher:padRemove"
+      }
+    }
+  ]
+}

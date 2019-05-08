@@ -1,2 +1,3 @@
-# ep_redis_publisher
-Publishes pad updates to a redis server
+# Ep_redis_publisher
+
+Etherpad-Lite plugin that publishes pad creation, updates and removal events to a redis server.
