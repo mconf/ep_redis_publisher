@@ -1,9 +1,19 @@
 
 const redis = require('redis');
+const settings = require('ep_etherpad-lite/node/utils/Settings');
 
 let HOST = '127.0.0.1';
 let PORT = 6379;
 let CHANNEL = 'from-etherpad-redis-channel';
+let PASSWORD = null;
+
+var areParamsOk = (settings.ep_redis_publisher) ? true : false;
+
+if (areParamsOk) {
+  HOST = settings.ep_redis_publisher.host || HOST;
+  PORT = settings.ep_redis_publisher.port || PORT;
+  PASSWORD = settings.ep_redis_publisher.password || PASSWORD;
+}
 
 const strategy = function(options) {
   if (options.error && options.error.code === 'ECONNREFUSED') {
@@ -24,9 +34,10 @@ const strategy = function(options) {
   return Math.min(options.attempt * 100, 3000);
 };
 
-let params = {
+const params = {
   host: HOST,
   port: PORT,
+  password: PASSWORD,
   retry_strategy: strategy
 };
 
