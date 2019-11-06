@@ -44,7 +44,9 @@ const params = {
 const publisher = redis.createClient(params);
 
 const buildEnvelope = function(name) {
-  return { name: name, routing: 'etherpad' };
+  const timestamp = (new Date()).getTime();
+  const routing = { sender: 'etherpad' };
+  return { name: name, routing: routing, timestamp: timestamp };
 };
 
 const buildCore = function(name, content) {
