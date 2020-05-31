@@ -5,7 +5,7 @@ const settings = require('ep_etherpad-lite/node/utils/Settings');
 let HOST = '127.0.0.1';
 let PORT = 6379;
 let CHANNEL = 'from-etherpad-redis-channel';
-let PASSWORD = null;
+let PASSWORD = undefined;
 
 var areParamsOk = (settings.ep_redis_publisher) ? true : false;
 
