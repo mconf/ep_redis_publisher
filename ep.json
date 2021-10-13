@@ -3,9 +3,18 @@
     {
       "name": "ep_redis_publisher",
       "hooks": {
-        "padCreate": "ep_redis_publisher/publisher:padCreate",
-        "padUpdate": "ep_redis_publisher/publisher:padUpdate",
-        "padRemove": "ep_redis_publisher/publisher:padRemove"
+        "loadSettings": ":publish",
+        "shutdown": ":publish",
+        "expressConfigure": ":publish",
+        "expressCreateServer": ":publish",
+        "expressCloseServer": ":publish",
+        "onAccessCheck": ":publish",
+        "padCreate": ":publish",
+        "padLoad": ":publish",
+        "padUpdate": ":publish",
+        "padCopy": ":publish",
+        "padRemove": ":publish",
+        "userLeave": ":publish"
       }
     }
   ]
