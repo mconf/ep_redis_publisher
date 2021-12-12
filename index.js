@@ -3,6 +3,15 @@ const settings = require('ep_etherpad-lite/node/utils/Settings');
 
 const CHANNEL = settings.ep_redis_publisher.channel || 'from-etherpad-redis-channel';
 
+// Remove unnecessary data from message's body
+const sanitizeMessageBody = (body) => {
+  if (body.pad && body.pad._db) {
+    delete body.pad._db;
+  }
+  
+  return body;
+};
+
 // JSON.stringify filter to remove circular references
 // adapted from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Errors/Cyclic_object_value#circular_references
 const getCircularReplacer = () => {
@@ -74,7 +83,7 @@ const build = (name, body) => {
 
   return JSON.stringify({
     envelope: buildEnvelope(name),
-    core: buildCore(name, body),
+    core: buildCore(name, sanitizeMessageBody(body)),
   }, getCircularReplacer());
 };
 
