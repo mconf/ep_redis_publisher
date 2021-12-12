@@ -3,6 +3,22 @@ const settings = require('ep_etherpad-lite/node/utils/Settings');
 
 const CHANNEL = settings.ep_redis_publisher.channel || 'from-etherpad-redis-channel';
 
+// JSON.stringify filter to remove circular references
+// adapted from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Errors/Cyclic_object_value#circular_references
+const getCircularReplacer = () => {
+  const seen = new WeakSet();
+  
+  return (key, value) => {
+    if (typeof value === "object" && value !== null) {
+      if (seen.has(value)) return;
+      
+      seen.add(value);
+    }
+    
+    return value;
+  };
+};
+
 const retry = (options) => {
   if (options.error && options.error.code === 'ECONNREFUSED') {
     logger.error('redis', 'connection refused');
@@ -59,7 +75,7 @@ const build = (name, body) => {
   return JSON.stringify({
     envelope: buildEnvelope(name),
     core: buildCore(name, body),
-  });
+  }, getCircularReplacer());
 };
 
 exports.publish = (event, body) => {
