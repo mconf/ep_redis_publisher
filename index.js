@@ -5,11 +5,20 @@ const CHANNEL = settings.ep_redis_publisher.channel || 'from-etherpad-redis-chan
 
 // Remove unnecessary data from message's body
 const sanitizeMessageBody = (body) => {
-  if (body.pad && body.pad._db) {
-    delete body.pad._db;
+  let response = { ...body };
+
+  if (response.pad && response.pad._db) {
+    // clone object and remove _db from body.pad
+    response = {
+      ...response,
+      pad: {
+        ...response.pad,
+        _db: undefined,
+      },
+    };
   }
-  
-  return body;
+
+  return response;
 };
 
 // JSON.stringify filter to remove circular references
