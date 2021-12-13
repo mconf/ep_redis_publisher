@@ -1,7 +1,7 @@
 {
   "name": "ep_redis_publisher",
-  "version": "0.0.2",
-  "description": "Etherpad-Lite plugin that publshes (some) server hooks' events to redis",
+  "version": "0.0.3",
+  "description": "Etherpad-Lite plugin that publishes server hooks' events to redis",
   "author": {
     "name": "Pedro Beschorner Marin",
     "email": "pedrobmarin@gmail.com",
