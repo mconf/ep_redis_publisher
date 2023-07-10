@@ -18,6 +18,9 @@ const sanitizeMessageBody = (body) => {
     };
   }
 
+  // Explicitly add padId to body.pad, as pad.toJSON() may remove the id.
+  if (body?.pad?.id) { body.pad.padId = body.pad.id; }
+
   return response;
 };
 
